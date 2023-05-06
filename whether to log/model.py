@@ -52,31 +52,7 @@ class RobertaClassificationHead(nn.Module):
         self.dense3 = nn.Linear(config.hidden_size, int(config.hidden_size/2))
         self.out_proj_3 = nn.Linear(int(config.hidden_size/2), 2)
         
-    # def __init__(self, config):
-    #     super().__init__()
-    #     # self.dense = nn.Linear(config.hidden_size*2, config.hidden_size)
-    #     self.dense = nn.Linear(config.hidden_size, config.hidden_size*2)
-    #     self.dense2 = nn.Linear(config.hidden_size*2, config.hidden_size)
-    #     self.dropout = nn.Dropout(config.hidden_dropout_prob)
-    #     self.out_proj = nn.Linear(config.hidden_size, 2)
 
-    # def __init__(self, config):
-    #     super().__init__()
-    #     # self.dense = nn.Linear(config.hidden_size*2, config.hidden_size)
-    #     self.dense1 = nn.Linear(config.hidden_size, config.hidden_size*2)
-    #     self.dense2 = nn.Linear(config.hidden_size*2, config.hidden_size)
-    #     self.dense3 = nn.Linear(config.hidden_size, int(config.hidden_size/2))
-    #     self.dropout = nn.Dropout(config.hidden_dropout_prob)
-    #     self.out_proj = nn.Linear(int(config.hidden_size/2), 2)
-        
-    # def __init__(self, config):
-    #     super().__init__()
-    #     # self.dense1 = nn.Linear(config.hidden_size, config.hidden_size)
-    #     self.dense1 = nn.Linear(config.hidden_size, config.hidden_size*2)
-    #     self.dense2 = nn.Linear(config.hidden_size*2, config.hidden_size)
-    #     self.dense3 = nn.Linear(config.hidden_size, int(config.hidden_size/2))
-    #     self.dropout = nn.Dropout(config.hidden_dropout_prob)
-    #     self.out_proj = nn.Linear(int(config.hidden_size/2), 2)
 
     def forward(self, features, **kwargs):
         x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
@@ -96,40 +72,8 @@ class RobertaClassificationHead(nn.Module):
         x = self.dropout(x)
         x3 = self.out_proj_3(x)
         return x1, x2, x3
-    
-    # def forward(self, features, **kwargs):
-    #     x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
-    #     # x = x.reshape(-1,x.size(-1)*2)
-    #     x = x.reshape(-1,x.size(-1))
-    #     x = self.dropout(x)
-    #     x = self.dense(x)
-    #     x = torch.tanh(x)
-    #     x = self.dropout(x)
-    #     x = self.dense2(x)
-    #     x = torch.tanh(x)
-    #     x = self.dropout(x)
-    #     x = self.out_proj(x)
-    #     return x
-        
-    # def forward(self, features, **kwargs):
-    #     x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
-    #     # x = x.reshape(-1,x.size(-1)*2)
-    #     x = x.reshape(-1,x.size(-1))
-    #     x = self.dropout(x)
-    #     x = self.dense1(x)
-    #     x = torch.tanh(x)
-    #     x = self.dropout(x)
-    #     x = self.dense2(x)
-    #     x = torch.tanh(x)
-    #     x = self.dropout(x)
-    #     x = self.dense3(x)
-    #     x = torch.tanh(x)
-    #     # x = self.dropout(x)
-    #     # x = self.dense4(x)
-    #     # x = torch.tanh(x)
-    #     x = self.dropout(x)
-    #     x = self.out_proj(x)
-    #     return x
+ 
+
         
 class Model(nn.Module):   
     def __init__(self, encoder,config,tokenizer,args):
@@ -157,15 +101,6 @@ class Model(nn.Module):
         inputs_embeddings=inputs_embeddings*(~nodes_mask)[:,:,None]+avg_embeddings*nodes_mask[:,:,None]    
         
         outputs = self.encoder.roberta(inputs_embeds=inputs_embeddings,attention_mask=attn_mask,position_ids=position_idx,token_type_ids=position_idx.eq(-1).long())[0]
-        # logits=self.classifier(outputs)
-        # prob=F.softmax(logits, dim=-1)
-        # if labels is not None:
-        #     # loss_fct = CrossEntropyLoss()
-        #     loss_fct = FocalLoss(gamma=2,alpha=0.42)
-        #     loss = loss_fct(logits, labels)
-        #     return loss, prob
-        # else:
-        #     return prob
         
         logits1, logits2, logits3 =self.classifier(outputs)
         # shape: [batch_size, num_classes]
@@ -178,14 +113,10 @@ class Model(nn.Module):
             loss1 = loss_fct(logits1, labels)
             loss2 = loss_fct(logits2, labels)
             loss3 = loss_fct(logits3, labels)
-            # loss4 = loss_fct(logits4, labels)
-            # loss5 = loss_fct(logits5, labels)
         
             loss = 0.05*loss1 + 0.35*loss2 + 0.6*loss3
             prob = 0.05*prob1 + 0.35*prob2 + + 0.6*prob3
             
-            # loss = 0.1*loss1 + 0.1*loss2 + 0.8*loss3
-            # prob = 0.1*prob1 + 0.1*prob2 + 0.8*prob3
             return loss, prob
         else:
             prob = prob3
