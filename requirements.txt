@@ -1,0 +1,6 @@
+numpy
+tqdm
+tree-sitter==0.20.0
+torch
+scikit-learn
+transformers==4.18.0
