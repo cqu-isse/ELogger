@@ -77,7 +77,7 @@ def get_args_by_task_model(task, sub_task, model_tag):
             bs = 48
         elif task == 'whether_to_log':
             if model_tag in ['codebert', 'roberta', 'codet5p']:
-                bs = 16
+                bs = 32
             else:
                 bs = 10
     lr = 5
