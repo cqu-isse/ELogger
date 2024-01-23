@@ -1,4 +1,4 @@
-WORKDIR="/home/fuying/CodeT5/CodeT5_new"
+WORKDIR=os.getcwd()
 export PYTHONPATH=$WORKDIR
 
 TASK=${1}
