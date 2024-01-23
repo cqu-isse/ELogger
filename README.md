@@ -3,7 +3,7 @@ Here is a repo for our paper: End-to-End Log Statement Generation at Block-Level
 
 
 ## Dataset
-The dataset we used is provided by [LACNE].
+The original dataset we used is provided by LACNE. The original dataset can be found at this link: https://drive.google.com/drive/folders/1D12y-CIJTYLxMeSmGQjxEXjTEzQImgaH?usp=sharing
 
 ## Project Structure
 ```
