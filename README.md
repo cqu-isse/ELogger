@@ -23,7 +23,9 @@ pip install -r requirements.txt
 ```
 
 ## Step 2: Prepare Datasets
+The whether_to_log example dataset is under ```/examples/whether_to_log_dataset```
 
+The www_log example dataset is under ```/examples/www_to_log_dataset```
 
 ## Step 3: Fine-tune or Inference
 ELogger and the variant of ELogger based on UniXcoder: You can use the shell provided in /whether_to_log/README.md and /www_log/README.md to fine-tune or inference. 
