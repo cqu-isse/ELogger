@@ -3,12 +3,14 @@ Here is a repo for our paper: End-to-End Log Statement Generation at Block-Level
 
 
 ## Project Structure
+```
 ├─whether_to_log  # whether-to-log component. ELogger and the variant of ELogger based on UniXcoder.
 ├─www_log         # www-log component. ELogger and the variant of ELogger based on UniXcoder.     
 ├─dataset    
 ├─outputs     
 ├─CodeT5p         # The variant of ELogger based on CodeT5p
 └─
+```
 
 ## Step 1: Check Python Dependencies
 To install ELogger dependencies, please run:
