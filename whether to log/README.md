@@ -3,11 +3,9 @@ train.txt/valid.txt/test.txt stored in the following format:
 	code_block	label
 
 ### Fine-tune
-We pro
 
-
-```shell for ELogger
-
+#### shell for ELogger
+```
 mkdir saved_models_for_Elogger
 python run.py \
     --output_dir=saved_models \
@@ -30,9 +28,8 @@ python run.py \
 ```
 
 
-
-```shell for the variant of ELogger based on UniXcoder
-
+#### shell for the variant of ELogger based on UniXcoder
+```
 mkdir saved_models_for_UniXcoder
 python run_4_UniXcoder.py \
     --output_dir saved_models \
@@ -52,10 +49,8 @@ python run_4_UniXcoder.py \
 
 ### Inference
 
-We use full test data for inference. 
-
-```shell for ELogger
-
+#### shell for ELogger
+```
 python run.py \
     --output_dir=saved_models \
     --config_name=microsoft/graphcodebert-base \
@@ -75,9 +70,8 @@ python run.py \
 ```
 
 
-
-```shell for the variant of ELogger based on UniXcoder
-
+#### shell for the variant of ELogger based on UniXcoder
+```
 python run_4_UniXcoder.py \
     --output_dir saved_models \
     --model_name_or_path microsoft/unixcoder-base \
