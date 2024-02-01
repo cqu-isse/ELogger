@@ -19,11 +19,11 @@ To install ELogger dependencies, please run:
 pip install -r requirements.txt
 ```
 
-## Step 2: Prepare Datasets
+## Step 2: Prepare Dataset
 
 The original dataset we used is provided by LACNE. The original dataset can be found at this link: https://drive.google.com/drive/folders/1D12y-CIJTYLxMeSmGQjxEXjTEzQImgaH?usp=sharing
 
-The full processed datasets can be found at: https://drive.google.com/drive/folders/1N06FIgEuE4l3NXwqrg3xbffHOfRhPhdN?usp=share_link
+The full processed dataset can be found at: https://drive.google.com/drive/folders/1N06FIgEuE4l3NXwqrg3xbffHOfRhPhdN?usp=share_link
 
 The whether_to_log example dataset is under ```/examples/whether_to_log_dataset```
 The www_log example dataset is under ```/examples/www_to_log_dataset```
@@ -32,6 +32,7 @@ If you want to run ELogger on the full datasets, you should download the data fr
 
 ## Step 3: Fine-tune or Inference
 ELogger and the variant of ELogger based on UniXcoder: You can use the shell provided in /whether_to_log/README.md and /www_log/README.md to fine-tune or inference. 
+
 The variant of ELogger based on CodeT5p: You can use the shell provided in /CodeT5p/README.md to fine-tune or inference. 
 
 The outputs of ELogger and baselines can be  found at this link: https://drive.google.com/drive/folders/17gzLW7gBoX3GNjWKHdzMzkmOAOAgjp7c?usp=share_link
